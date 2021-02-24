@@ -98,7 +98,7 @@ commands:
               export AWS_DEFAULT_REGION=$PERFORMANCE_EC2_REGION
               export EC2_PRIVATE_PEM=$PERFORMANCE_EC2_PRIVATE_PEM
 
-              python3 remote-runner.py \
+              redisbench-admin run-remote --module_path \
                 --terraform_bin_path /workspace/terraform \
                 --module_path /workspace/$MODULE_ARTIFACT \
                 --github_actor << parameters.github_actor >> \
