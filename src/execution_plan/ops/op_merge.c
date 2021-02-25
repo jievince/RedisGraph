@@ -49,7 +49,7 @@ static int _UpdateProperty(Record r, GraphEntity *ge, EntityUpdateEvalCtx *updat
 	// Try to get current property value.
 	SIValue *old_value = GraphEntity_GetProperty(ge, update_ctx->attribute_id);
 
-	if(old_value == PROPERTY_NOTFOUND) {
+	if(old_value == ATTRIBUTE_NOTFOUND) {
 		// Adding a new property; do nothing if its value is NULL.
 		if(SI_TYPE(new_value) == T_NULL) {
 			res = 0;

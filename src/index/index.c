@@ -27,7 +27,7 @@ static int _getNodeAttribute(void *ctx, const char *fieldName, const void *id, c
 	Attribute_ID attrId = GraphContext_GetAttributeID(gc, fieldName);
 	SIValue *v = GraphEntity_GetProperty((GraphEntity *)&n, attrId);
 	int ret;
-	if(v == PROPERTY_NOTFOUND) {
+	if(v == ATTRIBUTE_NOTFOUND) {
 		ret = RSVALTYPE_NOTFOUND;
 	} else if(v->type & T_STRING) {
 		*strVal = v->stringval;
@@ -124,7 +124,7 @@ void Index_IndexNode(Index *idx, const Node *n) {
 	// Add document field for each indexed property.
 	for(uint i = 0; i < idx->fields_count; i++) {
 		SIValue *v = GraphEntity_GetProperty((GraphEntity *)n, idx->fields_ids[i]);
-		if(v == PROPERTY_NOTFOUND) continue;
+		if(v == ATTRIBUTE_NOTFOUND) continue;
 
 		doc_field_count++;
 		if(idx->type == IDX_FULLTEXT) {
@@ -227,7 +227,7 @@ const char **Index_GetFields(const Index *idx) {
 
 bool Index_ContainsAttribute(const Index *idx, Attribute_ID attribute_id) {
 	ASSERT(idx != NULL);
-	if(attribute_id == ATTRIBUTE_NOTFOUND) return false;
+	if(attribute_id == ATTRIBUTE_UNKNOWN) return false;
 	for(uint i = 0; i < idx->fields_count; i++) {
 		if(idx->fields_ids[i] == attribute_id) return true;
 	}

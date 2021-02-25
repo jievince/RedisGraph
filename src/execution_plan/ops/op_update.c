@@ -31,10 +31,11 @@ static bool _UpdateEntity(GraphEntity *ge, PendingUpdateCtx *update) {
 	// Try to get current property value.
 	SIValue *old_value = GraphEntity_GetProperty(ge, attr_id);
 
-	if(old_value == PROPERTY_NOTFOUND) {
+	if(old_value == ATTRIBUTE_NOTFOUND) {
 		// Adding a new property; do nothing if its value is NULL.
 		if(SI_TYPE(new_value) != T_NULL) {
-			res = GraphEntity_AddProperty(ge, attr_id, new_value);
+			GraphEntity_AddProperty(ge, attr_id, new_value);
+			res = true;
 		}
 	} else {
 		// Update property.
